@@ -1,0 +1,12 @@
+{
+  "student_id": 101, "name": "Riya Sharma", "email": "riya@example.com", "year": 2, "branch": "CSE",
+  "subjects": [
+    { "subject_id": 1, "name": "Mathematics", "skill_level": 4 },
+    { "subject_id": 2, "name": "DBMS", "skill_level": 3 }
+  ],
+  "availability": [
+    { "day_of_week": 1, "start_time": "18:00", "end_time": "20:00", "mode_preference": "library" },
+    { "day_of_week": 3, "start_time": "17:00", "end_time": "19:00", "mode_preference": "either" },
+    { "day_of_week": 6, "start_time": "10:00", "end_time": "13:00", "mode_preference": "online" }
+  ]
+}

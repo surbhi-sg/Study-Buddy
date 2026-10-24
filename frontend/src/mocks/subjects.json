@@ -1,0 +1,7 @@
+[
+  { "subject_id": 1, "name": "Mathematics" },
+  { "subject_id": 2, "name": "DBMS" },
+  { "subject_id": 3, "name": "Operating Systems" },
+  { "subject_id": 4, "name": "Computer Networks" },
+  { "subject_id": 5, "name": "DSA" }
+]

@@ -1,0 +1,12 @@
+{
+  "student": { "student_id": 101, "name": "Riya Sharma" },
+  "streak": 7,
+  "upcoming_sessions": [
+    { "session_id": 501, "group_id": 7, "group_name": "Maths Revision Squad", "subject": "Mathematics", "start_datetime": "2026-10-25T17:00:00", "duration_minutes": 90, "location_or_link": "Central Library, Room 2" },
+    { "session_id": 502, "group_id": 9, "group_name": "DBMS Night Owls", "subject": "DBMS", "start_datetime": "2026-10-26T20:00:00", "duration_minutes": 60, "location_or_link": "https://meet.google.com/abc-defg-hij" }
+  ],
+  "groups": [
+    { "group_id": 7, "group_name": "Maths Revision Squad", "subject": "Mathematics", "mode": "library", "member_count": 4, "max_size": 4, "role": "admin" },
+    { "group_id": 9, "group_name": "DBMS Night Owls", "subject": "DBMS", "mode": "online", "member_count": 3, "max_size": 5, "role": "member" }
+  ]
+}

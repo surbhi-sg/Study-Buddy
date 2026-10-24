@@ -1,0 +1,8 @@
+[
+  { "group_id": 7, "group_name": "Maths Revision Squad", "subject_id": 1, "subject": "Mathematics", "mode": "library", "member_count": 4, "max_size": 4, "next_session": "2026-10-25T17:00:00", "avg_rating": 4.6,
+    "match": { "score": 88, "time": 36, "skill": 20, "mode": 20, "rating": 12 } },
+  { "group_id": 9, "group_name": "DBMS Night Owls", "subject_id": 2, "subject": "DBMS", "mode": "online", "member_count": 3, "max_size": 5, "next_session": "2026-10-26T20:00:00", "avg_rating": 4.2,
+    "match": { "score": 74, "time": 28, "skill": 16, "mode": 20, "rating": 10 } },
+  { "group_id": 12, "group_name": "OS Deadlock Busters", "subject_id": 3, "subject": "Operating Systems", "mode": "online", "member_count": 2, "max_size": 6, "next_session": null, "avg_rating": null,
+    "match": { "score": 51, "time": 20, "skill": 15, "mode": 10, "rating": 6 } }
+]

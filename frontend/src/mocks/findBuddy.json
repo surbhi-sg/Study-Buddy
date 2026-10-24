@@ -1,0 +1,18 @@
+{
+  "subject": "Mathematics",
+  "date": "2026-10-25",
+  "candidates": [
+    { "student_id": 114, "name": "Aarav Mehta", "year": 2, "branch": "CSE", "skill_level": 4, "mode_preference": "library",
+      "slot": { "start_time": "17:00", "end_time": "19:00" }, "avg_rating": 4.8,
+      "match": { "score": 91, "time": 40, "skill": 20, "mode": 20, "rating": 11 } },
+    { "student_id": 127, "name": "Neha Gupta", "year": 2, "branch": "IT", "skill_level": 3, "mode_preference": "either",
+      "slot": { "start_time": "17:30", "end_time": "19:00" }, "avg_rating": 4.5,
+      "match": { "score": 84, "time": 36, "skill": 16, "mode": 20, "rating": 12 } },
+    { "student_id": 133, "name": "Kabir Singh", "year": 3, "branch": "ECE", "skill_level": 5, "mode_preference": "library",
+      "slot": { "start_time": "18:00", "end_time": "20:00" }, "avg_rating": 4.2,
+      "match": { "score": 77, "time": 32, "skill": 15, "mode": 20, "rating": 10 } },
+    { "student_id": 141, "name": "Ishita Rao", "year": 2, "branch": "CSE", "skill_level": 2, "mode_preference": "online",
+      "slot": { "start_time": "16:00", "end_time": "17:30" }, "avg_rating": null,
+      "match": { "score": 62, "time": 24, "skill": 14, "mode": 10, "rating": 14 } }
+  ]
+}
