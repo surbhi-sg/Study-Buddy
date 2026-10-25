@@ -23,8 +23,8 @@ exports.register = asyncHandler(async (req, res) => {
   if (typeof password !== 'string' || password.length < 8 || password.length > 72) {
     details.password = 'must be 8 to 72 characters';   // bcrypt ignores everything after 72 bytes
   }
-  if (year != null && !(Number.isInteger(year) && year >= 1 && year <= 4)) {
-    details.year = 'must be a whole number from 1 to 4';
+  if (!Number.isInteger(year) || year < 1 || year > 4) {
+    details.year = 'is required (whole number from 1 to 4)';
   }
   if (Object.keys(details).length) {
     throw new HttpError(400, 'VALIDATION_ERROR', 'Invalid input', details);
@@ -37,12 +37,12 @@ exports.register = asyncHandler(async (req, res) => {
   // A duplicate email raises errno 1062, which errorHandler turns into 409 ALREADY_EXISTS
   const [result] = await pool.query(
     'INSERT INTO student (name, email, password_hash, year, branch) VALUES (?, ?, ?, ?, ?)',
-    [cleanName, cleanEmail, hash, year ?? null, branch ?? null]
+    [cleanName, cleanEmail, hash, year, branch ?? null]
   );
 
   res.status(201).json({
     token: signToken(result.insertId),
-    student: { student_id: result.insertId, name: cleanName, email: cleanEmail, year: year ?? null, branch: branch ?? null },
+    student: { student_id: result.insertId, name: cleanName, email: cleanEmail, year, branch: branch ?? null },
   });
 });
 
