@@ -17,32 +17,43 @@ function signToken(studentId) {
 exports.register = asyncHandler(async (req, res) => {
   const { name, email, password, year, branch } = req.body || {};
 
+  const cleanName = String(name ?? '').trim();
+  const cleanEmail = String(email ?? '').trim().toLowerCase();
+  const cleanBranch = String(branch ?? '').trim();
+
   const details = {};
-  if (!name || !String(name).trim()) details.name = 'is required';
-  if (!email || !EMAIL_RE.test(String(email).trim())) details.email = 'must be a valid email';
+  if (!cleanName) details.name = 'is required';
+  else if (cleanName.length > 100) details.name = 'must be at most 100 characters';
+
+  if (!EMAIL_RE.test(cleanEmail)) details.email = 'must be a valid email';
+  else if (cleanEmail.length > 255) details.email = 'must be at most 255 characters';
+
   if (typeof password !== 'string' || password.length < 8 || password.length > 72) {
     details.password = 'must be 8 to 72 characters';   // bcrypt ignores everything after 72 bytes
   }
+
   if (!Number.isInteger(year) || year < 1 || year > 4) {
     details.year = 'is required (whole number from 1 to 4)';
   }
+
+  if (!cleanBranch) details.branch = 'is required';
+  else if (cleanBranch.length > 60) details.branch = 'must be at most 60 characters';
+
   if (Object.keys(details).length) {
     throw new HttpError(400, 'VALIDATION_ERROR', 'Invalid input', details);
   }
 
   const hash = await bcrypt.hash(password, 10);
-  const cleanEmail = String(email).trim().toLowerCase();
-  const cleanName = String(name).trim();
 
   // A duplicate email raises errno 1062, which errorHandler turns into 409 ALREADY_EXISTS
   const [result] = await pool.query(
     'INSERT INTO student (name, email, password_hash, year, branch) VALUES (?, ?, ?, ?, ?)',
-    [cleanName, cleanEmail, hash, year, branch ?? null]
+    [cleanName, cleanEmail, hash, year, cleanBranch]
   );
 
   res.status(201).json({
     token: signToken(result.insertId),
-    student: { student_id: result.insertId, name: cleanName, email: cleanEmail, year, branch: branch ?? null },
+    student: { student_id: result.insertId, name: cleanName, email: cleanEmail, year, branch: cleanBranch },
   });
 });
 
