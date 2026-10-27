@@ -1,0 +1,41 @@
+@import "tailwindcss";
+
+/* Design tokens: use them as bg-primary, text-secondary, bg-cream, etc. */
+@theme {
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --color-primary: #5442B9;
+  --color-primary-600: #6A5AC6;
+  --color-primary-300: #B9B0E4;
+  --color-primary-100: #E9E6F8;
+  --color-primary-50: #F4F2FC;
+
+  --color-secondary: #FF9F10;
+  --color-secondary-300: #FFC874;
+  --color-secondary-100: #FFEFD6;
+
+  --color-success: #4ADE80;
+  --color-info: #246BFD;
+  --color-warning: #FACC15;
+  --color-error: #F75555;
+  --color-disabled: #D8D8D8;
+
+  --color-cream: #F7F3EE;
+  --color-ink: #1F1B2E;
+  --color-muted: #77738A;
+}
+
+@layer base {
+  *, ::before, ::after { border-color: #ECE8F4; }
+  body { background: var(--color-cream); color: var(--color-ink); }
+}
+
+/* Reusable pieces (Tailwind v4 custom utilities) */
+@utility card { @apply rounded-3xl bg-white p-5 shadow-[0_2px_12px_rgba(84,66,185,0.06)]; }
+@utility chip { @apply inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium; }
+@utility btn { @apply inline-flex items-center justify-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition disabled:cursor-not-allowed disabled:bg-disabled disabled:text-white; }
+@utility btn-primary { @apply btn bg-primary text-white enabled:hover:bg-primary-600; }
+@utility btn-secondary { @apply btn bg-secondary text-white enabled:hover:brightness-105; }
+@utility btn-ghost { @apply btn bg-primary-50 text-primary enabled:hover:bg-primary-100; }
+@utility input { @apply mt-1 w-full rounded-2xl border bg-white px-4 py-3 text-sm outline-none focus:border-primary-300 focus:ring-4 focus:ring-primary-100; }
+@utility section-title { @apply mb-3 flex items-center justify-between text-lg font-bold; }
