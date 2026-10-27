@@ -32,8 +32,8 @@ exports.register = asyncHandler(async (req, res) => {
     details.password = 'must be 8 to 72 characters';   // bcrypt ignores everything after 72 bytes
   }
 
-  if (!Number.isInteger(year) || year < 1 || year > 4) {
-    details.year = 'is required (whole number from 1 to 4)';
+  if (!Number.isInteger(year) || year < 1 || year > 6) {
+    details.year = 'is required (whole number from 1 to 6)';   // matches ck_student_year in schema.sql
   }
 
   if (!cleanBranch) details.branch = 'is required';

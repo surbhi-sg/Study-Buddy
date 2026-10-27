@@ -9,6 +9,8 @@ const pool = mysql.createPool({
   database: process.env.DB_NAME,
   waitForConnections: true,
   connectionLimit: 10,
+  timezone: 'Z',          // DATETIME columns are stored in UTC (schema.sql); read them as UTC
+  decimalNumbers: true,   // AVG(), ROUND() etc. come back as numbers, not strings
 });
 
 module.exports = pool;
