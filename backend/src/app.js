@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const pool = require('./config/db');
 const authRoutes = require('./routes/auth');
+const apiRoutes = require('./routes/api');
 const HttpError = require('./utils/httpError');
 const errorHandler = require('./middleware/errorHandler');
 
@@ -19,6 +20,7 @@ app.get('/api/health', async (req, res) => {
 });
 
 app.use('/api/auth', authRoutes);
+app.use('/api', apiRoutes);
 
 app.use((req, res, next) => next(new HttpError(404, 'NOT_FOUND', 'Route not found')));
 app.use(errorHandler);   // must be last

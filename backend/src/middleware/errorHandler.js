@@ -8,6 +8,7 @@ const DB_ERRORS = {
 };
 const TRIGGER_STATUS = {
   GROUP_FULL: 409, SESSION_OVERLAP: 409, SLOT_OVERLAP: 409, NOT_A_MEMBER: 403,
+  NOT_ATTENDED: 403, STUDENT_BUSY: 409, VALIDATION_ERROR: 400, NOT_FOUND: 404,
 };
 
 module.exports = function errorHandler(err, req, res, next) {
