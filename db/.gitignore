@@ -1,0 +1,2 @@
+# Large generated file for EXPLAIN tests: regenerate with python db/generate_seed.py --bulk 5000
+seed_bulk.sql
