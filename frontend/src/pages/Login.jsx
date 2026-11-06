@@ -40,7 +40,6 @@ export default function Login() {
         <button disabled={busy} className="btn-primary w-full">{busy ? 'Logging in…' : 'Log in'}</button>
         <p className="text-center text-sm text-muted">New here? <Link to="/register" className="font-semibold text-primary">Create an account</Link></p>
       </form>
-      <p className="mt-4 text-center text-xs text-muted">Demo: riya@studybuddy.test / password123</p>
     </div>
   )
 }

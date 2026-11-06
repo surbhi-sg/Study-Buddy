@@ -8,9 +8,29 @@ import { Loading, ErrorBox, Empty } from '../components/Status.jsx'
 import { tomorrow, ymd, longDate, MODE_ICON } from '../format.js'
 
 const MAX_PICKS = 3   // a group has at most 4 people including you
+const MIN_MINUTES = 15  // shortest session the database allows
 
 const toMin = (t) => { const [h, m] = t.split(':').map(Number); return h * 60 + m }
 const fromMin = (n) => `${String(Math.floor(n / 60)).padStart(2, '0')}:${String(n % 60).padStart(2, '0')}`
+
+// Suggested group: the best-ranked people who are all free together for at least 15 minutes.
+// Tries each candidate (best first) as the starting point and adds the next best who still fit.
+function suggestGroup(cands) {
+  let best = []
+  for (const seed of cands) {
+    let start = toMin(seed.slot.start_time), end = toMin(seed.slot.end_time)
+    const group = [seed]
+    for (const c of cands) {
+      if (group.length >= MAX_PICKS) break
+      if (group.includes(c)) continue
+      const s = Math.max(start, toMin(c.slot.start_time)), e = Math.min(end, toMin(c.slot.end_time))
+      if (e - s >= MIN_MINUTES) { group.push(c); start = s; end = e }
+    }
+    if (group.length > best.length) best = group
+    if (best.length === Math.min(MAX_PICKS, cands.length)) break
+  }
+  return best.map((c) => c.student_id)
+}
 
 function ScoreRing({ score, size = 60 }) {
   const r = size / 2 - 5, c = 2 * Math.PI * r
@@ -77,7 +97,7 @@ export default function FindGroup() {
     if (!pickedPeople.length) return null
     const start = Math.max(...pickedPeople.map((p) => toMin(p.slot.start_time)))
     const end = Math.min(...pickedPeople.map((p) => toMin(p.slot.end_time)))
-    return end > start ? { start: fromMin(start), end: fromMin(end), minutes: end - start } : { none: true }
+    return end - start >= MIN_MINUTES ? { start: fromMin(start), end: fromMin(end), minutes: end - start } : { none: true }
   }, [pickedPeople])
 
   useEffect(() => { if (notice) { const t = setTimeout(() => setNotice(null), 3500); return () => clearTimeout(t) } }, [notice])
@@ -88,7 +108,7 @@ export default function FindGroup() {
     try {
       const r = await findCandidates(Number(subjectId), date)
       setResult(r)
-      setPicked(r.candidates.slice(0, MAX_PICKS).map((c) => c.student_id))   // suggested group = top matches
+      setPicked(suggestGroup(r.candidates))   // best matches who share a free time
     } catch (err) { setError(err.message) }
     finally { setBusy(false) }
   }
